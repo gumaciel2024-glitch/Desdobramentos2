@@ -4,7 +4,7 @@
 
 Baixe o repositório em **Code → Download ZIP** e extraia todos os arquivos. Com o Python 3.11 ou superior e o Python Launcher instalados, dê dois cliques em **iniciar.bat**. No primeiro uso, mantenha a conexão à internet para instalar as dependências do Python. O robô usa o Microsoft Edge instalado no Windows e tenta o Google Chrome instalado se o Edge não abrir.
 
-Informe o caminho da planilha e o endereço HTTPS do SISBAJUD quando o programa pedir. Se ocorrer um erro, a janela permanece aberta para mostrar a mensagem.
+Informe o caminho da planilha. Na janela do navegador aberta pelo robô, acesse o SISBAJUD manualmente. O endereço é opcional na execução pelo terminal. Se ocorrer um erro, a janela permanece aberta para mostrar a mensagem.
 
 Use os cabeçalhos **Número do Processo** e **Status** na primeira linha da aba ativa. Formate o número completo como texto. Por padrão, o protótipo pula as linhas que já têm um status preenchido.
 
