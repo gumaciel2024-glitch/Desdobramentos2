@@ -1,10 +1,11 @@
 import argparse
 import re
+import sys
 import time
 from pathlib import Path
 
 from openpyxl import load_workbook
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import Error, sync_playwright
 
 CNJ = r"\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}"
 VAZIO = re.compile(r"nenhum(?:a)?\s+(?:registro|resultado|ordem|dado)[^\n]*|não foram encontrad[oa]s[^\n]*", re.I)
@@ -100,6 +101,26 @@ def calibrar(pagina, vazio, rotulo):
     return icones[1]
 
 
+def abrir_navegador(chromium):
+    if sys.platform != "win32":
+        return chromium.launch(headless=False)
+
+    falhas = []
+    for canal, nome in (("msedge", "Microsoft Edge"), ("chrome", "Google Chrome")):
+        try:
+            navegador = chromium.launch(channel=canal, headless=False)
+        except Error as erro:
+            falhas.append(f"{nome}: {str(erro).splitlines()[0]}")
+            continue
+        print(f"Navegador: {nome}")
+        return navegador
+
+    raise SystemExit(
+        "Não foi possível abrir o Edge nem o Chrome instalados.\n"
+        + "\n".join(falhas)
+    )
+
+
 def executar(args):
     caminho = Path(args.planilha)
     saida = caminho.with_name(caminho.stem + "_triagem.xlsx")
@@ -114,7 +135,7 @@ def executar(args):
         raise SystemExit("Use os cabeçalhos Número do Processo e Status na primeira linha.")
     vazio = re.compile(args.sem_ordem, re.I) if args.sem_ordem else VAZIO
     with sync_playwright() as p:
-        navegador = p.chromium.launch(headless=False)
+        navegador = abrir_navegador(p.chromium)
         pagina = navegador.new_page()
         pagina.goto(args.url)
         input("Entre no SISBAJUD, abra Ordens Judiciais > Busca por filtros de pesquisa e pressione Enter aqui. ")
