@@ -19,8 +19,6 @@ if not exist ".venv\sisbajud-pronto" (
     echo Instalando as dependencias do robo...
     "%ROBO_PY%" -m pip install "playwright>=1.51" openpyxl
     if errorlevel 1 goto :erro
-    "%ROBO_PY%" -m playwright install chromium
-    if errorlevel 1 goto :erro
     type nul > ".venv\sisbajud-pronto"
 )
 "%ROBO_PY%" "triagem.py"
