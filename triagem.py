@@ -148,7 +148,16 @@ def executar(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("planilha")
-    parser.add_argument("url", help="Endereço do SISBAJUD")
+    parser.add_argument("planilha", nargs="?")
+    parser.add_argument("url", nargs="?", help="Endereço do SISBAJUD")
     parser.add_argument("--sem-ordem", help="Expressão que identifica a mensagem de busca vazia")
-    executar(parser.parse_args())
+    args = parser.parse_args()
+    if args.planilha is None:
+        args.planilha = input("Caminho da planilha .xlsx: ").strip().strip('"')
+    if not args.planilha:
+        parser.error("Informe o caminho da planilha.")
+    if args.url is None:
+        args.url = input("Endereço do SISBAJUD (https://...): ").strip()
+        if not args.url.startswith("https://"):
+            parser.error("Informe o endereço completo do SISBAJUD, começando com https://.")
+    executar(args)
