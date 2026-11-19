@@ -2,7 +2,7 @@
 
 ## Preparar no Windows
 
-Baixe o repositório em **Code → Download ZIP** e extraia todos os arquivos. Com o Python 3.11 ou superior e o Python Launcher instalados, dê dois cliques em **iniciar.bat**. No primeiro uso, mantenha a conexão à internet para a instalação do Chromium e das dependências.
+Baixe o repositório em **Code → Download ZIP** e extraia todos os arquivos. Com o Python 3.11 ou superior e o Python Launcher instalados, dê dois cliques em **iniciar.bat**. No primeiro uso, mantenha a conexão à internet para instalar as dependências do Python. O robô usa o Microsoft Edge instalado no Windows e tenta o Google Chrome instalado se o Edge não abrir.
 
 Informe o caminho da planilha e o endereço HTTPS do SISBAJUD quando o programa pedir. Se ocorrer um erro, a janela permanece aberta para mostrar a mensagem.
 
