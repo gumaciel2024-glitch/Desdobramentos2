@@ -2,13 +2,9 @@
 
 ## Preparar no Windows
 
-No PowerShell, dentro da pasta `sisbajud`:
+Baixe o repositório em **Code → Download ZIP** e extraia todos os arquivos. Com o Python 3.11 ou superior e o Python Launcher instalados, dê dois cliques em **iniciar.bat**. No primeiro uso, mantenha a conexão à internet para a instalação do Chromium e das dependências.
 
-```powershell
-py -m pip install "playwright>=1.51" openpyxl
-py -m playwright install chromium
-py triagem.py "processos.xlsx" "ENDEREÇO_DO_SISBAJUD"
-```
+Informe o caminho da planilha e o endereço HTTPS do SISBAJUD quando o programa pedir. Se ocorrer um erro, a janela permanece aberta para mostrar a mensagem.
 
 Use os cabeçalhos **Número do Processo** e **Status** na primeira linha da aba ativa. Formate o número completo como texto. Por padrão, o protótipo pula as linhas que já têm um status preenchido.
 
@@ -23,4 +19,4 @@ Entre no SISBAJUD na janela aberta e acesse **Ordens Judiciais → Busca por fil
 
 A saída é uma cópia com o sufixo `_triagem.xlsx`. Resultados inconclusivos deixam o status em branco e aparecem no terminal para revisão.
 
-Use `--sem-ordem "mensagem exibida"` se o texto de busca vazia na sua tela for diferente. O ícone ativo sinaliza a necessidade de conferir os detalhes da ordem. A validação dos campos, ícones e paginação na interface real do SISBAJUD ainda está pendente.
+Para execução pelo terminal, use `.venv\Scripts\python.exe triagem.py "processos.xlsx" "ENDEREÇO_DO_SISBAJUD"`. Acrescente `--sem-ordem "mensagem exibida"` se o texto de busca vazia na sua tela for diferente. O ícone ativo sinaliza a necessidade de conferir os detalhes da ordem. A validação dos campos, ícones e paginação na interface real do SISBAJUD ainda está pendente.
