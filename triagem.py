@@ -137,7 +137,8 @@ def executar(args):
     with sync_playwright() as p:
         navegador = abrir_navegador(p.chromium)
         pagina = navegador.new_page()
-        pagina.goto(args.url)
+        if args.url:
+            pagina.goto(args.url)
         input("Entre no SISBAJUD, abra Ordens Judiciais > Busca por filtros de pesquisa e pressione Enter aqui. ")
         apagado = calibrar(pagina, vazio, "apagada")
         ativo = calibrar(pagina, vazio, "ativa")
@@ -177,8 +178,4 @@ if __name__ == "__main__":
         args.planilha = input("Caminho da planilha .xlsx: ").strip().strip('"')
     if not args.planilha:
         parser.error("Informe o caminho da planilha.")
-    if args.url is None:
-        args.url = input("Endereço do SISBAJUD (https://...): ").strip()
-        if not args.url.startswith("https://"):
-            parser.error("Informe o endereço completo do SISBAJUD, começando com https://.")
     executar(args)
